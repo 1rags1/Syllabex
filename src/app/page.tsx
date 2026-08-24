@@ -9,7 +9,7 @@ export default function HomePage() {
   const { courses, hydrated } = useAcademicStore();
 
   return (
-    <main className="mx-auto min-h-screen max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
+    <main className="mx-auto min-h-screen min-h-dvh max-w-6xl px-4 py-6 pb-28 sm:px-6 sm:py-8 sm:pb-28 lg:px-8">
       {!hydrated ? (
         <div className="space-y-6">
           <div className="glass h-48 animate-pulse rounded-2xl" />

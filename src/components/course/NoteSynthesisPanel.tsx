@@ -21,7 +21,7 @@ export function NoteSynthesisPanel({
 
   return (
     <div className="space-y-4 border-t border-white/5 pt-6">
-      <div className="flex items-center justify-between gap-3">
+      <div className="flex flex-col items-start justify-between gap-3 sm:flex-row sm:items-center sm:gap-3">
         <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-wider text-zinc-500">
           <Sparkles className="size-3.5 text-violet-400" />
           AI synthesis
@@ -30,7 +30,7 @@ export function NoteSynthesisPanel({
           type="button"
           onClick={onSynthesize}
           disabled={loading || !hasContent}
-          className="focus-ring inline-flex items-center gap-2 rounded-lg border border-violet-500/30 bg-violet-500/10 px-3 py-1.5 text-xs font-medium text-violet-300 transition-colors hover:bg-violet-500/15 disabled:opacity-40"
+          className="focus-ring inline-flex min-h-11 items-center gap-2 rounded-lg border border-violet-500/30 bg-violet-500/10 px-3 py-1.5 text-xs font-medium text-violet-300 transition-colors hover:bg-violet-500/15 disabled:opacity-40 sm:min-h-0"
         >
           {loading ? (
             <>

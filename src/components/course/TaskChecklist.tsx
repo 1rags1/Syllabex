@@ -120,7 +120,7 @@ export function TaskChecklist({ courseId }: { courseId: string }) {
             setShowForm((v) => !v);
             setEditingId(null);
           }}
-          className="focus-ring inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm font-medium text-zinc-200 transition-colors hover:bg-white/10"
+          className="focus-ring inline-flex min-h-11 items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm font-medium text-zinc-200 transition-colors hover:bg-white/10 sm:min-h-0"
         >
           {showForm ? (
             <>
@@ -197,7 +197,7 @@ function TaskRow({
 
   return (
     <li
-      className={`group flex items-center gap-3 rounded-xl border border-white/5 bg-white/[0.02] px-4 py-3.5 transition-colors ${
+      className={`group flex items-start gap-3 rounded-xl border border-white/5 bg-white/[0.02] px-4 py-3.5 transition-colors sm:items-center ${
         task.completed ? "opacity-50" : ""
       }`}
     >
@@ -233,11 +233,11 @@ function TaskRow({
         </span>
       )}
 
-      <div className="flex shrink-0 gap-1 opacity-0 transition-opacity group-hover:opacity-100">
+      <div className="mt-0.5 flex shrink-0 gap-1 sm:mt-0 sm:opacity-0 sm:transition-opacity sm:group-hover:opacity-100">
         <button
           type="button"
           onClick={onEdit}
-          className="focus-ring rounded-lg p-1.5 text-zinc-500 hover:bg-white/5 hover:text-zinc-300"
+          className="focus-ring rounded-lg p-2.5 text-zinc-500 hover:bg-white/5 hover:text-zinc-300 sm:p-1.5"
           aria-label="Edit task"
         >
           <Pencil className="size-3.5" />
@@ -245,7 +245,7 @@ function TaskRow({
         <button
           type="button"
           onClick={onDelete}
-          className="focus-ring rounded-lg p-1.5 text-zinc-500 hover:bg-rose-500/10 hover:text-rose-400"
+          className="focus-ring rounded-lg p-2.5 text-zinc-500 hover:bg-rose-500/10 hover:text-rose-400 sm:p-1.5"
           aria-label="Delete task"
         >
           <Trash2 className="size-3.5" />

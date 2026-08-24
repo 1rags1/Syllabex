@@ -162,19 +162,19 @@ export function NoteWorkspace({ courseId }: { courseId: string }) {
         <button
           type="button"
           onClick={newNote}
-          className="focus-ring flex w-full items-center justify-center gap-2 rounded-xl border border-dashed border-white/10 py-3 text-sm font-medium text-zinc-400 transition-colors hover:border-white/20 hover:text-zinc-200"
+          className="focus-ring flex min-h-11 w-full items-center justify-center gap-2 rounded-xl border border-dashed border-white/10 py-3 text-sm font-medium text-zinc-400 transition-colors hover:border-white/20 hover:text-zinc-200"
         >
           <Plus className="size-4" />
           New note
         </button>
 
-        <ul className="space-y-1">
+        <ul className="-mx-1 flex gap-2 overflow-x-auto px-1 pb-1 lg:mx-0 lg:block lg:space-y-1 lg:overflow-visible lg:px-0 lg:pb-0">
           {courseNotes.map((note) => (
-            <li key={note.id}>
+            <li key={note.id} className="shrink-0 lg:shrink">
               <button
                 type="button"
                 onClick={() => setActiveId(note.id)}
-                className={`focus-ring w-full rounded-lg px-3 py-2.5 text-left text-sm transition-colors ${
+                className={`focus-ring w-40 rounded-lg px-3 py-2.5 text-left text-sm transition-colors lg:w-full ${
                   activeId === note.id
                     ? "bg-white/10 text-zinc-100"
                     : "text-zinc-500 hover:bg-white/5 hover:text-zinc-300"
@@ -209,14 +209,14 @@ export function NoteWorkspace({ courseId }: { courseId: string }) {
           </p>
         </div>
       ) : (
-        <div className="glass space-y-6 rounded-2xl p-6 sm:p-8">
+        <div className="glass space-y-6 rounded-2xl p-4 sm:p-8">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <input
               type="text"
               value={draft.title}
               onChange={(e) => updateDraft({ title: e.target.value })}
               placeholder="Lecture title"
-              className="focus-ring w-full bg-transparent text-xl font-medium text-zinc-50 placeholder:text-zinc-600 sm:text-2xl"
+              className="focus-ring w-full bg-transparent text-lg font-medium text-zinc-50 placeholder:text-zinc-600 sm:text-2xl"
             />
             <div className="flex shrink-0 items-center gap-2">
               <ViewToggle view={view} onChange={setView} />
@@ -267,7 +267,7 @@ export function NoteWorkspace({ courseId }: { courseId: string }) {
             )}
 
             {(view === "preview" || view === "split") && (
-              <div>
+              <div className={view === "split" ? "hidden lg:block" : undefined}>
                 <label className="mb-2 block text-xs font-medium uppercase tracking-wider text-zinc-500">
                   Preview
                 </label>
@@ -355,19 +355,21 @@ function ViewToggle({
   onChange: (v: "edit" | "preview" | "split") => void;
 }) {
   const options = [
-    { key: "edit" as const, icon: PenLine, label: "Edit" },
-    { key: "split" as const, icon: Eye, label: "Split" },
-    { key: "preview" as const, icon: Eye, label: "Preview" },
+    { key: "edit" as const, icon: PenLine, label: "Edit", hideOnMobile: false },
+    { key: "split" as const, icon: Eye, label: "Split", hideOnMobile: true },
+    { key: "preview" as const, icon: Eye, label: "Preview", hideOnMobile: false },
   ];
 
   return (
     <div className="flex rounded-lg border border-white/10 p-0.5">
-      {options.map(({ key, label }) => (
+      {options.map(({ key, label, hideOnMobile }) => (
         <button
           key={key}
           type="button"
           onClick={() => onChange(key)}
           className={`focus-ring rounded-md px-2.5 py-1 text-[11px] font-medium transition-colors ${
+            hideOnMobile ? "hidden lg:inline" : ""
+          } ${
             view === key
               ? "bg-white/10 text-zinc-200"
               : "text-zinc-500 hover:text-zinc-300"

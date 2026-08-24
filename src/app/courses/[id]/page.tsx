@@ -24,7 +24,7 @@ export default function CourseWorkspacePage({
 
   if (!hydrated) {
     return (
-      <main className="mx-auto max-w-5xl px-4 py-10 sm:px-6">
+      <main className="mx-auto max-w-5xl px-4 py-6 pb-28 sm:px-6 sm:py-10">
         <div className="space-y-6">
           <div className="glass h-40 animate-pulse rounded-2xl" />
           <div className="glass h-96 animate-pulse rounded-2xl" />
@@ -51,8 +51,8 @@ export default function CourseWorkspacePage({
   }
 
   return (
-    <main className="mx-auto max-w-5xl px-4 py-8 sm:px-6 sm:py-10">
-      <div className="space-y-10">
+    <main className="mx-auto max-w-5xl px-4 py-6 pb-28 sm:px-6 sm:py-10">
+      <div className="space-y-6 sm:space-y-10">
         <CourseHeader course={course} />
 
         <nav
@@ -103,7 +103,7 @@ function TabButton({
       role="tab"
       aria-selected={active}
       onClick={onClick}
-      className={`focus-ring -mb-px inline-flex items-center gap-2 border-b-2 px-4 py-3 text-sm font-medium transition-colors ${
+      className={`focus-ring -mb-px inline-flex min-h-11 items-center gap-2 border-b-2 px-3 py-3 text-sm font-medium transition-colors sm:min-h-0 sm:px-4 ${
         active
           ? "border-zinc-200 text-zinc-100"
           : "border-transparent text-zinc-500 hover:text-zinc-300"

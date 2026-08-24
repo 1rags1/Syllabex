@@ -104,7 +104,7 @@ export function AIChatPanel() {
           e.preventDefault();
           send();
         }}
-        className="mt-4 flex gap-2 border-t border-white/5 pt-4"
+        className="mt-4 flex gap-2 border-t border-white/5 pt-4 pb-[env(safe-area-inset-bottom)]"
       >
         <input
           type="text"

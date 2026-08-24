@@ -23,7 +23,7 @@ import type { Course } from "@/types/academic";
 function StatusBadge({ status }: { status: CampusStatus }) {
   if (status.type === "in_class") {
     return (
-      <span className="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-xs font-medium text-emerald-300">
+      <span className="inline-flex max-w-full items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-xs font-medium text-emerald-300">
         <span className="relative flex size-2">
           <span className="absolute inline-flex size-full animate-ping rounded-full bg-emerald-400 opacity-60" />
           <span className="relative inline-flex size-2 rounded-full bg-emerald-400" />
@@ -35,8 +35,8 @@ function StatusBadge({ status }: { status: CampusStatus }) {
 
   if (status.type === "transitioning") {
     return (
-      <span className="inline-flex items-center gap-2 rounded-full border border-amber-500/30 bg-amber-500/10 px-3 py-1 text-xs font-medium text-amber-300">
-        <Navigation className="size-3.5" />
+      <span className="inline-flex max-w-full flex-wrap items-center gap-2 rounded-full border border-amber-500/30 bg-amber-500/10 px-3 py-1 text-xs font-medium text-amber-300">
+        <Navigation className="size-3.5 shrink-0" />
         Transitioning · {status.from.building} → {status.to.building}
       </span>
     );
@@ -86,8 +86,8 @@ function NextUpCard({
         boxShadow: `0 0 0 1px rgba(0,0,0,0.2), 0 8px 32px rgba(0,0,0,0.35), inset 3px 0 0 ${color}`,
       }}
     >
-      <div className="flex items-start justify-between gap-3">
-        <div>
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between sm:gap-3">
+        <div className="min-w-0">
           <p className="text-xs font-medium uppercase tracking-wider text-zinc-500">
             {nextUp.label}
           </p>
@@ -96,7 +96,7 @@ function NextUpCard({
               {course.code}
             </Link>
           </p>
-          <h2 className="mt-0.5 text-xl font-semibold text-zinc-50">
+          <h2 className="mt-0.5 text-lg font-semibold text-zinc-50 sm:text-xl">
             <Link
               href={`/courses/${course.id}`}
               className="transition-colors hover:text-white"
@@ -105,8 +105,8 @@ function NextUpCard({
             </Link>
           </h2>
         </div>
-        <div className="rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-right">
-          <p className="text-lg font-semibold tabular-nums text-zinc-100">
+        <div className="w-fit rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-left sm:shrink-0 sm:text-right">
+          <p className="text-base font-semibold tabular-nums text-zinc-100 sm:text-lg">
             {timeLabel}
           </p>
           <p className="text-[11px] text-zinc-500">
@@ -130,16 +130,16 @@ function NextUpCard({
 
       {nextUp.kind === "upcoming" && nextUp.breakMinutes !== undefined && (
         <div className="mt-4 rounded-xl border border-white/5 bg-white/[0.03] px-4 py-3">
-          <p className="flex items-center gap-2 text-xs font-medium text-zinc-300">
-            <Navigation className="size-3.5 text-amber-400" />
-            {nextUp.breakMinutes}-minute break
+          <p className="flex flex-col gap-1.5 text-xs font-medium text-zinc-300 sm:flex-row sm:items-center sm:gap-2">
+            <span className="inline-flex items-center gap-2">
+              <Navigation className="size-3.5 text-amber-400" />
+              {nextUp.breakMinutes}-minute break
+            </span>
             {nextUp.routeTip && (
-              <>
-                <ArrowRight className="size-3 text-zinc-600" />
-                <span className="font-normal text-zinc-400">
-                  {nextUp.routeTip}
-                </span>
-              </>
+              <span className="inline-flex items-start gap-2 font-normal text-zinc-400 sm:items-center">
+                <ArrowRight className="mt-0.5 size-3 shrink-0 text-zinc-600 sm:mt-0" />
+                {nextUp.routeTip}
+              </span>
             )}
           </p>
         </div>
@@ -169,13 +169,13 @@ export function HeroSection({ courses }: { courses: Course[] }) {
             <p className="text-sm font-medium text-zinc-400">
               {formatLongDate(now)}
             </p>
-            <p className="mt-1 font-mono text-4xl font-light tabular-nums tracking-tight text-zinc-50 sm:text-5xl">
+            <p className="mt-1 font-mono text-[2rem] font-light tabular-nums tracking-tight text-zinc-50 sm:text-5xl">
               {formatClockTime(now)}
             </p>
           </div>
         </div>
 
-        <div className="glass rounded-xl px-4 py-3 text-right">
+        <div className="glass self-start rounded-xl px-4 py-3 text-left sm:text-right">
           <p className="text-[11px] uppercase tracking-wider text-zinc-500">
             Fall 2026
           </p>

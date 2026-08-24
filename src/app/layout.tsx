@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { AIAssistantDrawer } from "@/components/ai/AIAssistantDrawer";
 import { AcademicProvider } from "@/context/AcademicContext";
@@ -19,6 +19,13 @@ export const metadata: Metadata = {
   title: "UTD Academic Dashboard · Fall 2026",
   description:
     "Personal modern academic dashboard for Fall 2026 at The University of Texas at Dallas.",
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: "#09090b",
 };
 
 export default function RootLayout({

@@ -39,7 +39,7 @@ export function CourseHeader({ course }: { course: Course }) {
       </Link>
 
       <div
-        className="glass rounded-2xl p-6 sm:p-8"
+        className="glass rounded-2xl p-5 sm:p-8"
         style={{ boxShadow: `inset 4px 0 0 ${color}` }}
       >
         <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
@@ -66,7 +66,7 @@ export function CourseHeader({ course }: { course: Course }) {
               {c.professorEmail && (
                 <a
                   href={`mailto:${c.professorEmail}`}
-                  className="focus-ring inline-flex items-center gap-2 transition-colors hover:text-zinc-200"
+                  className="focus-ring inline-flex max-w-full items-center gap-2 break-all transition-colors hover:text-zinc-200"
                 >
                   <Mail className="size-4 text-zinc-500" />
                   {c.professorEmail}
@@ -92,7 +92,7 @@ export function CourseHeader({ course }: { course: Course }) {
                 href={c.syllabusUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="focus-ring inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-sm font-medium text-zinc-200 transition-colors hover:bg-white/10"
+                className="focus-ring inline-flex min-h-11 items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-sm font-medium text-zinc-200 transition-colors hover:bg-white/10"
               >
                 <FileText className="size-4 text-zinc-400" />
                 Syllabus
@@ -104,7 +104,7 @@ export function CourseHeader({ course }: { course: Course }) {
                 href={c.portalUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="focus-ring inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-sm font-medium text-zinc-200 transition-colors hover:bg-white/10"
+                className="focus-ring inline-flex min-h-11 items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-sm font-medium text-zinc-200 transition-colors hover:bg-white/10"
               >
                 Course portal
                 <ExternalLink className="size-3.5 text-zinc-500" />

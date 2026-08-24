@@ -60,8 +60,8 @@ function ClassSessionCard({
           : { boxShadow: `inset 2px 0 0 ${color}40` }
       }
     >
-      <div className="flex items-start gap-3 p-4">
-        <div className="min-w-[5.5rem] shrink-0">
+        <div className="flex items-start gap-3 p-4">
+        <div className="min-w-[4.25rem] shrink-0 sm:min-w-[5.5rem]">
           <span className="inline-block rounded-md bg-white/5 px-2 py-1 font-mono text-xs tabular-nums text-zinc-300">
             {formatTimeDisplay(course.startTime)}
           </span>
@@ -110,13 +110,13 @@ function ClassSessionCard({
               {course.title}
             </Link>
           </h3>
-          <p className="mt-1 flex items-center gap-1 text-xs text-zinc-500">
-            <MapPin className="size-3" />
-            {course.routeNotes}
+          <p className="mt-1 flex items-start gap-1 text-xs text-zinc-500">
+            <MapPin className="mt-0.5 size-3 shrink-0" />
+            <span>{course.routeNotes}</span>
           </p>
         </div>
 
-        <div className="flex shrink-0 flex-col items-end gap-2">
+        <div className="hidden shrink-0 flex-col items-end gap-2 sm:flex">
           <button
             type="button"
             onClick={onToggleCheckIn}
@@ -143,6 +143,34 @@ function ClassSessionCard({
             />
           </button>
         </div>
+      </div>
+
+      <div className="flex items-center justify-between gap-2 border-t border-white/5 px-4 py-3 sm:hidden">
+        <button
+          type="button"
+          onClick={handleExpand}
+          className="focus-ring inline-flex min-h-11 items-center gap-1 text-[11px] text-zinc-500"
+          aria-expanded={expanded}
+        >
+          <StickyNote className="size-3" />
+          Notes
+          <ChevronDown
+            className={`size-3 transition-transform ${expanded ? "rotate-180" : ""}`}
+          />
+        </button>
+        <button
+          type="button"
+          onClick={onToggleCheckIn}
+          className={`focus-ring inline-flex min-h-11 items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-medium transition-colors ${
+            attended
+              ? "border-emerald-500/40 bg-emerald-500/15 text-emerald-300"
+              : "border-white/10 bg-white/5 text-zinc-400"
+          }`}
+          aria-pressed={attended}
+        >
+          <Check className="size-3.5" />
+          {attended ? "Present" : "Check in"}
+        </button>
       </div>
 
       {expanded && (
@@ -277,7 +305,7 @@ export function DaySchedule() {
               role="tab"
               aria-selected={active}
               onClick={() => setSelectedDay(key)}
-              className={`focus-ring flex flex-1 flex-col items-center rounded-lg px-2 py-2 text-xs font-medium transition-colors ${
+              className={`focus-ring flex min-h-11 flex-1 flex-col items-center justify-center rounded-lg px-1 py-2 text-[11px] font-medium transition-colors sm:min-h-0 sm:px-2 sm:text-xs ${
                 active
                   ? "bg-white/10 text-zinc-100"
                   : "text-zinc-500 hover:text-zinc-300"
@@ -288,7 +316,10 @@ export function DaySchedule() {
                 <span
                   className={`mt-0.5 text-[10px] ${active ? "text-zinc-400" : "text-zinc-600"}`}
                 >
-                  {count} {count === 1 ? "class" : "classes"}
+                  <span className="sm:hidden">{count}</span>
+                  <span className="hidden sm:inline">
+                    {count} {count === 1 ? "class" : "classes"}
+                  </span>
                 </span>
               )}
             </button>

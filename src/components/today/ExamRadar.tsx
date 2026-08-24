@@ -104,7 +104,7 @@ export function ExamRadar() {
       <div className="mb-4 flex items-start justify-between gap-3">
         <div>
           <div className="flex items-center gap-2 text-sm font-medium text-zinc-300">
-            <AlertTriangle className="size-4 text-amber-400" />
+            <AlertTriangle className="size-4 shrink-0 text-amber-400" />
             Exam & priority radar
           </div>
           <p className="mt-1 text-xs text-zinc-500">
@@ -183,7 +183,7 @@ function RadarRow({
               </span>
             )}
           </div>
-          <p className="mt-1 truncate text-sm font-medium text-zinc-100">
+          <p className="mt-1 text-sm font-medium leading-snug text-zinc-100 sm:truncate">
             {assignment.title}
           </p>
           <p className="text-xs text-zinc-500">

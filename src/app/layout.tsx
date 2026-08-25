@@ -1,8 +1,11 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { ClerkProvider, Show } from "@clerk/nextjs";
 import { AIAssistantDrawer } from "@/components/ai/AIAssistantDrawer";
+import { AuthHeader } from "@/components/auth/AuthHeader";
 import { AcademicProvider } from "@/context/AcademicContext";
 import { AIAssistantProvider } from "@/context/AIAssistantContext";
+import { isClerkConfigured } from "@/lib/clerk";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -33,17 +36,40 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const clerkReady = isClerkConfigured();
+
+  const app = (
+    <AcademicProvider>
+      <AIAssistantProvider>
+        {clerkReady ? <AuthHeader /> : null}
+        {children}
+        {clerkReady ? (
+          <Show when="signed-in">
+            <AIAssistantDrawer />
+          </Show>
+        ) : (
+          <AIAssistantDrawer />
+        )}
+      </AIAssistantProvider>
+    </AcademicProvider>
+  );
+
   return (
     <html lang="en" className="dark">
       <body
         className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased`}
       >
-        <AcademicProvider>
-          <AIAssistantProvider>
-            {children}
-            <AIAssistantDrawer />
-          </AIAssistantProvider>
-        </AcademicProvider>
+        {clerkReady ? (
+          <ClerkProvider
+            appearance={{
+              cssLayerName: "clerk",
+            }}
+          >
+            {app}
+          </ClerkProvider>
+        ) : (
+          app
+        )}
       </body>
     </html>
   );
